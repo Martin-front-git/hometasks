@@ -1,53 +1,56 @@
-class Programmer {
-  protected programmerName!: string;
-}
-abstract class Project extends Programmer {
-  protected projectName!: string;
-
-  set setProgrammerName(programmer: string) {
-    this.programmerName = programmer;
+abstract class Human {
+  name: string;
+  constructor(name: string) {
+      this.name = name;
   }
-    get getProgrammerName() {
-    return this.programmerName;
-  }
+  abstract work(): void;
 }
 
-class PM extends Project {
-  protected pmName!: string;
-
-  set setProjectName(project: string) {
-    this.projectName = project;
-  }
-  get getProjectName() {
-    return this.projectName;
+class Programmer extends Human {
+  work() {
+      console.log(`${this.name} is coding.`);
   }
 }
 
-class Ceo extends PM {
-  protected ceoName!: string;
-  set setPmName(pm: string) {
-    this.pmName = pm;
+class ProjectManager extends Human {
+  project: Programmer[];
+  constructor(name: string, project: Programmer[]) {
+      super(name);
+      this.project = project;
   }
-  get getPmName() {
-    return this.pmName;
-  }
-}
-class Company extends Ceo {
-  companyName!: string;
-
-  set CompanyName(cName: string) {
-    this.companyName = cName;
-  }
-  get CompanyName() {
-    return this.companyName;
-  }
-  set CeoName(ceo: string) {
-    this.ceoName = ceo;
-  }
-  get CeoName() {
-    return this.ceoName;
+  work() {
+      console.log(`${this.name} is managing the project.`);
+      this.project.forEach((programmer) => programmer.work());
   }
 }
 
-const company = new Company();
-console.log(company);
+class CEO extends Human {
+  projects: ProjectManager[];
+  constructor(name: string, projects: ProjectManager[]) {
+      super(name);
+      this.projects = projects;
+  }
+  work() {
+      console.log(`${this.name} is overseeing the company.`);
+      this.projects.forEach((project) => project.work());
+  }
+}
+
+class Company {
+  ceo: CEO;
+  constructor(ceo: CEO) {
+      this.ceo = ceo;
+  }
+  startWork() {
+      this.ceo.work();
+  }
+}
+
+
+let programmer1 = new Programmer("Programmer 1");
+let programmer2 = new Programmer("Programmer 2");
+let projectManager = new ProjectManager("Project Manager", [programmer1, programmer2]);
+let ceo = new CEO("CEO", [projectManager]);
+let company = new Company(ceo);
+
+company.startWork();
