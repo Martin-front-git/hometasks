@@ -1,15 +1,53 @@
-function isPalindrome(num: number): string {
-  // We get the last digit of the number
-  const lastDigit: number = num % 10;
-  
-  // We get the first digit of the number
-  const firstDigit: number = parseInt(num.toString()[0]);
-  
-  // Checking the equality of the first and last digits
-  return firstDigit === lastDigit ? "the given digit is a palindrome" : "the given digit is not a palindrome";
+class Programmer {
+  protected programmerName!: string;
+}
+abstract class Project extends Programmer {
+  protected projectName!: string;
+
+  set setProgrammerName(programmer: string) {
+    this.programmerName = programmer;
+  }
+    get getProgrammerName() {
+    return this.programmerName;
+  }
 }
 
-let num: number = 1221;
-const result: string = isPalindrome(num);
+class PM extends Project {
+  protected pmName!: string;
 
-console.log(result);
+  set setProjectName(project: string) {
+    this.projectName = project;
+  }
+  get getProjectName() {
+    return this.projectName;
+  }
+}
+
+class Ceo extends PM {
+  protected ceoName!: string;
+  set setPmName(pm: string) {
+    this.pmName = pm;
+  }
+  get getPmName() {
+    return this.pmName;
+  }
+}
+class Company extends Ceo {
+  companyName!: string;
+
+  set CompanyName(cName: string) {
+    this.companyName = cName;
+  }
+  get CompanyName() {
+    return this.companyName;
+  }
+  set CeoName(ceo: string) {
+    this.ceoName = ceo;
+  }
+  get CeoName() {
+    return this.ceoName;
+  }
+}
+
+const company = new Company();
+console.log(company);
