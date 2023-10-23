@@ -1,26 +1,15 @@
-const allNumber: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; //default digits
-let phoneNumber: number = 94446468; //phone number to check
-
-const digits: number[] = []; //assigning an empty array
-
-// turn a number into an array
-while (phoneNumber > 0) { 
-    const digit: number = phoneNumber % 10;
-    digits.unshift(digit);
-    phoneNumber = Math.floor(phoneNumber / 10);
+function isPalindrome(num: number): string {
+  // We get the last digit of the number
+  const lastDigit: number = num % 10;
+  
+  // We get the first digit of the number
+  const firstDigit: number = parseInt(num.toString()[0]);
+  
+  // Checking the equality of the first and last digits
+  return firstDigit === lastDigit ? "the given digit is a palindrome" : "the given digit is not a palindrome";
 }
 
-// add the number 0 to the beginning of the array
-digits.unshift(0); 
+let num: number = 1221;
+const result: string = isPalindrome(num);
 
-//using a filter, we compare the given array and the array that needs to be checked
-const missingNumbers: number[] = allNumber.filter(number => !digits.includes(number));
-
-//return the array back to a number
-const numberAsString: string = missingNumbers.join('');
-const number: number = parseInt(numberAsString);
-
-console.log(`tasks array with default numbers: ${allNumber}`);
-console.log(`phone number: ${digits}`);
-console.log(`unspecified numbers: ${missingNumbers}`);
-console.log(number);
+console.log(result);
