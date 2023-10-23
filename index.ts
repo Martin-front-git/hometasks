@@ -2,9 +2,10 @@ const colors: string[] = ["red", "yellow", "blue", "black", "green"];
 
 function ColorsFun(colors: string[]): void {
     while (colors.length > 0) {
-        const randomIndex: number = Math.floor(Math.random() * colors.length);
-        const randomColor: string = colors.splice(randomIndex, 1)[0];
+        const random: number = Math.floor(Math.random() * colors.length);
+        const randomColor: string = colors[random];
         console.log(randomColor);
+        colors = colors.filter((color, index) => index !== random);
     }
 }
 
