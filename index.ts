@@ -1,19 +1,18 @@
-//узнаем число подмассивов
-function arraysCount(arr: any[]): number {
-  let count = 0;
-  let index = 0;
+// hashvum e massivi arjeqneri qanak@
+function arrSum(arr: any[]): number {
+  let sum = 0;
 
-  while (index < arr.length) {
-    if (Array.isArray(arr[index])) {
-      count++; 
-      count += arraysCount(arr[index]);
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      sum += arrSum(item);
+    } else if (typeof item === 'number') {
+      sum += item;
     }
-    index++;
   }
 
-  return count;
+  return sum;
 }
 
-const arr: any[] = [1, 2, 3, [1, 2], [1, [1, 2]]];
-const result: number = arraysCount(arr);
-console.log(`qanak: ${result}`);
+const arr: any[] = [1, 2, 3, [1, 2], [1, [1, 2,[2]]]];
+const result: number = arrSum(arr);
+console.log(`arjeqneri qanak: ${result}`);
